@@ -22,8 +22,14 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(security: "is_granted('ROLE_USER')"),
         new GetCollection(security: "is_granted('PUBLIC_ACCESS')"),
-        new Post(security: "is_granted('ROLE_TRUCK_OWNER')"),
-        new Put(security: "is_granted('ROLE_TRUCK_OWNER') and object.getOwner() == user"),
+        new Post(
+            security: "is_granted('ROLE_TRUCK_OWNER')",
+            processor: \App\State\TruckProcessor::class
+        ),
+        new Put(
+            security: "is_granted('ROLE_TRUCK_OWNER') and object.getOwner() == user",
+            processor: \App\State\TruckProcessor::class
+        ),
         new Delete(security: "is_granted('ROLE_TRUCK_OWNER') and object.getOwner() == user")
     ],
     normalizationContext: ['groups' => ['truck:read']],

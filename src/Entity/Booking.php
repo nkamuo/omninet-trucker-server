@@ -20,8 +20,14 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(security: "is_granted('ROLE_USER') and (object.getRenter() == user or object.getTruck().getOwner() == user)"),
         new GetCollection(security: "is_granted('ROLE_USER')"),
-        new Post(security: "is_granted('ROLE_RENTER')"),
-        new Put(security: "is_granted('ROLE_USER') and (object.getRenter() == user or object.getTruck().getOwner() == user)"),
+        new Post(
+            security: "is_granted('ROLE_RENTER')",
+            processor: \App\State\BookingProcessor::class
+        ),
+        new Put(
+            security: "is_granted('ROLE_USER') and (object.getRenter() == user or object.getTruck().getOwner() == user)",
+            processor: \App\State\BookingProcessor::class
+        ),
         new Delete(security: "is_granted('ROLE_USER') and (object.getRenter() == user or object.getTruck().getOwner() == user)")
     ],
     normalizationContext: ['groups' => ['booking:read']],
