@@ -1,0 +1,52 @@
+api_platform:
+    title: Apex Trucks - Truck Rental Platform API
+    version: 1.0.0
+    description: 'API for truck rental and booking management'
+
+    # Swagger/OpenAPI documentation
+    swagger:
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header
+
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
+        pagination_enabled: true
+        pagination_client_enabled: true
+        pagination_client_items_per_page: true
+        pagination_items_per_page: 30
+        pagination_maximum_items_per_page: 100
+
+    # Format configuration
+    formats:
+        jsonld:
+            mime_types: ['application/ld+json']
+        json:
+            mime_types: ['application/json']
+        html:
+            mime_types: ['text/html']
+
+    # Error formats
+    error_formats:
+        jsonproblem:
+            mime_types: ['application/problem+json']
+        jsonld:
+            mime_types: ['application/ld+json']
+
+    # OpenAPI configuration
+    openapi:
+        contact:
+            name: API Support
+            email: support@apextrucks.com
+        termsOfService: 'https://apextrucks.com/terms'
+        license:
+            name: Proprietary
+
+    # Enable HTTP caching
+    http_cache:
+        invalidation:
+            enabled: false
+        public: false
